@@ -6,18 +6,18 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory = "templates")
 
-@app.get("/")
-async def home():
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
     data = {
-        "text":"hi"
+        "page":"Home page"
     }
-    return {"data":data}
+    return templates.TemplateResponse("page.html", {"request":request, "data": data})
 
-@app.get("/page/{page_name}")
-async def page(page_name: str):
+@app.get("/page/{page_name}", response_class=HTMLResponse)
+async def page(request: Request, page_name: str):
 
     data = {
         "page":page_name
     }
 
-    return {"data":data}
+    return templates.TemplateResponse("page.html", {"request":request, "data": data})
