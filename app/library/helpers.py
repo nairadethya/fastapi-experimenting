@@ -1,5 +1,5 @@
 import os.path
-import Mar
+import markdown
 
 def openfile(filename):
     filepath = os.path.join("app/pages/", filename)
